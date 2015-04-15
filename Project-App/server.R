@@ -16,7 +16,7 @@ shinyServer(function(input, output) {
                      xlab = "Average wind speed of sample",
                      ylab = "Frequency",
                      main = "Frequency of average wind speed")
-                abline(v = mean(airquality$Wind, col = "darkred"))
+                abline(v = mean(airquality$Wind), col = "darkred", lwd = 4)
         })
         
         output$averageWind <- renderPrint({mean(airquality$Wind)})

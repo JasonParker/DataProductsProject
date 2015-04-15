@@ -21,7 +21,7 @@ shinyUI(
                             min = 5, max = 25, value = 5,
                             step = 5),
                 
-                h4("Average wind speed for airquality dataset"),
+                h4("Average wind speed for airquality dataset (red line)"),
                 verbatimTextOutput("averageWind")
 
         ),
