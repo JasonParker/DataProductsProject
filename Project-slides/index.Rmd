@@ -1,0 +1,66 @@
+---
+title       : Central Limit Theorem example
+subtitle    : Data products final project
+author      : Jason Parker
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- .class #id 
+
+## Quick overview
+This app demonstrates the Central Limit Theorem (CLT) using the airquality data set. The app shows that as you increase the number of samples and/or the number of observations per samples, a histogram of the means will center around the theoretical mean of the variable.
+
+---
+
+## How to use the app
+1. Select the number of samples with the “number of samples” slider.
+2. Select the number of observations per sample with the “number of observations per sample” slider.
+3. The histogram will be drawn each time you change one of the variables.
+4. The red vertical line on the histogram corresponds to the actual mean of the wind speed variable. You’ll find the actual mean value in the left side panel.
+
+---
+
+## Core code behind the app
+The user input determines the sampling that takes place in this app. The user selects the number of samples and the number of observations per sample. The app takes those figures and performs the sampling procedure. After sampling, the app generates a histogram to show the frequency of different mean values for Wind speed.
+```{r, eval=FALSE}
+x <- vector()
+        for (i in 1:as.numeric(input$samples)){
+                x[i] <- mean(sample(airquality$Wind, 
+                                        size = as.numeric(input$observations),
+                                        replace = TRUE))
+                }
+hist(x, breaks = 10,
+        xlab = "Average wind speed of sample",
+        ylab = "Frequency",
+        main = "Frequency of average wind speed")
+abline(v = mean(airquality$Wind), col = "darkred", lwd = 4)
+
+
+```
+
+---
+
+## Example of how the code renders
+Let's run an instance of the code where the number of samples is 30 and the number of observations per sample is 20.
+
+```{r, echo=FALSE}
+x <- vector()
+        for (i in 1:30){
+                x[i] <- mean(sample(airquality$Wind, 
+                                        size = 20,
+                                        replace = TRUE))
+                }
+hist(x, breaks = 10,
+        xlab = "Average wind speed of sample",
+        ylab = "Frequency",
+        main = "Frequency of average wind speed")
+abline(v = mean(airquality$Wind), col = "darkred", lwd = 4)
+
+
+```
+
+
